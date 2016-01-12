@@ -1,5 +1,6 @@
 package com.pan.guidesample.geoquiz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +43,9 @@ public class QuizActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setSubtitle("Bodies of water");
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
