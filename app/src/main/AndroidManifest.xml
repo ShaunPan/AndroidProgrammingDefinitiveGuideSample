@@ -21,6 +21,9 @@
         <activity
             android:name="com.pan.guidesample.geoquiz.QuizActivity"
             android:label="@string/GeoQuiz" />
+        <activity
+            android:name="com.pan.guidesample.geoquiz.CheatActivity"
+            android:label="@string/GeoQuiz" />
 
     </application>
 
