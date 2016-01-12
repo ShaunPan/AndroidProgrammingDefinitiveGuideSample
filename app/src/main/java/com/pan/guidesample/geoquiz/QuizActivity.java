@@ -121,7 +121,7 @@ public class QuizActivity extends Activity {
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].ismTrueQuestion();
 
-        int messageResId = 0;
+        int messageResId;
 
         if (mIsCheater) {
             messageResId = R.string.judgment_toast;
