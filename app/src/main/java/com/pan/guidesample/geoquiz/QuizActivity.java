@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,8 @@ public class QuizActivity extends Activity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mNextButton;
+    private ImageButton mNextButton;
+    private ImageButton mPrevButton;
     private TextView mQuestionTextView;
 
     private TrueFalse[] mQuestionBank = new TrueFalse[]{
@@ -39,6 +41,13 @@ public class QuizActivity extends Activity {
         setContentView(R.layout.activity_quiz);
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextQuestion();
+            }
+        });
+
         updateQuestion();
 
         mTrueButton = (Button) findViewById(R.id.true_button);
@@ -48,6 +57,7 @@ public class QuizActivity extends Activity {
                 checkAnswer(true);
             }
         });
+
         mFalseButton = (Button) findViewById(R.id.false_button);
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,18 +65,41 @@ public class QuizActivity extends Activity {
                 checkAnswer(false);
             }
         });
-        mNextButton = (Button) findViewById(R.id.next_button);
+
+        mNextButton = (ImageButton) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                updateQuestion();
+                nextQuestion();
+            }
+        });
+
+        mPrevButton = (ImageButton) findViewById(R.id.prev_button);
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //避免返回首个问题后，程序崩溃的问题
+                if (mCurrentIndex > 0) {
+                    mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
+                    updateQuestion();
+                } else {
+                    Toast.makeText(QuizActivity.this, R.string.question_tips, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     /**
+     * 切换至下一个问题
+     */
+    private void nextQuestion() {
+        mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+        updateQuestion();
+    }
+
+    /**
      * 检测答案是否正确
+     *
      * @param userPressedTrue 答案
      */
     private void checkAnswer(boolean userPressedTrue) {
