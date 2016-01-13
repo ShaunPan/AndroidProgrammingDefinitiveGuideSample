@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.pan.androidprogrammingdefinitiveguidesample.R;
+import com.pan.guidesample.criminalintent.CrimeListActivity;
 import com.pan.guidesample.geoquiz.QuizActivity;
 
 public class MainActivity extends Activity {
@@ -32,7 +33,8 @@ public class MainActivity extends Activity {
      * @param view 点击的控件
      */
     public void criminalIntent(View view) {
-
+        Intent intent = new Intent(this, CrimeListActivity.class);
+        startActivity(intent);
     }
 
     /**

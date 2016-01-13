@@ -9,55 +9,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="geoQuiz"
-        android:text="@string/GeoQuiz" />
+        android:text="@string/GeoQuiz"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:onClick="criminalIntent"
-        android:text="@string/CriminalIntent" />
+        android:text="@string/CriminalIntent"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:onClick="helloMoon"
-        android:text="@string/HelloMoon" />
+        android:text="@string/HelloMoon"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:onClick="nerdLauncher"
-        android:text="@string/NerdLauncher" />
+        android:text="@string/NerdLauncher"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:onClick="remoteControl"
-        android:text="@string/RemoteControl" />
+        android:text="@string/RemoteControl"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:onClick="photoGallery"
-        android:text="@string/PhotoGallery" />
+        android:text="@string/PhotoGallery"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:onClick="dragAndDraw"
-        android:text="@string/DragAndDraw" />
+        android:text="@string/DragAndDraw"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:onClick="runTracker"
-        android:text="@string/RunTracker" />
+        android:text="@string/RunTracker"
+        android:textAllCaps="false" />
 
 </LinearLayout>

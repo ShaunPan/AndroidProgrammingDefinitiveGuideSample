@@ -18,12 +18,24 @@
             </intent-filter>
         </activity>
 
+        <!-- GeoQuiz -->
         <activity
             android:name="com.pan.guidesample.geoquiz.QuizActivity"
             android:label="@string/GeoQuiz" />
         <activity
             android:name="com.pan.guidesample.geoquiz.CheatActivity"
             android:label="@string/GeoQuiz" />
+
+        <!-- CrimeIntent -->
+        <activity
+            android:name="com.pan.guidesample.criminalintent.CrimeActivity"
+            android:label="@string/CriminalIntent" />
+        <activity
+            android:name="com.pan.guidesample.criminalintent.CrimeListActivity"
+            android:label="@string/CriminalIntent" />
+        <activity
+            android:name="com.pan.guidesample.criminalintent.CrimePagerActivity"
+            android:label="@string/CriminalIntent" />
 
     </application>
 
