@@ -2,6 +2,7 @@ package com.pan.guidesample.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,11 +25,13 @@ public class CheatActivity extends Activity {
     private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;
     private Button mShowAnswer;
+    private TextView mVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
+
         mAnswerIsTrue = getIntent().getBooleanExtra(CheatActivity.EXTRA_ANSWER_IS_TRUE, false);
         mAnswerTextView = (TextView) findViewById(R.id.answerTextView);
         mShowAnswer = (Button) findViewById(R.id.showAnswerButton);
@@ -43,6 +46,10 @@ public class CheatActivity extends Activity {
                 setAnswerShownResult(true);
             }
         });
+
+        mVersion = (TextView) findViewById(R.id.tv_version);
+        //api版本号
+        mVersion.setText(getText(R.string.api_level)+""+Build.VERSION.SDK_INT);
     }
 
     /**
