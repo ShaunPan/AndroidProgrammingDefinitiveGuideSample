@@ -3,5 +3,6 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.DeviceDefault.Light.DarkActionBar"></style>
 
+    <style name="HelloMoonStyle" parent="android:Theme"/>
 
 </resources>

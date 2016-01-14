@@ -8,6 +8,7 @@ import android.view.View;
 import com.pan.androidprogrammingdefinitiveguidesample.R;
 import com.pan.guidesample.criminalintent.CrimeListActivity;
 import com.pan.guidesample.geoquiz.QuizActivity;
+import com.pan.guidesample.hellomoon.HelloMoonActivity;
 
 public class MainActivity extends Activity {
 
@@ -43,7 +44,8 @@ public class MainActivity extends Activity {
      * @param view 点击的控件
      */
     public void helloMoon(View view) {
-
+        Intent intent = new Intent(this, HelloMoonActivity.class);
+        startActivity(intent);
     }
 
     /**

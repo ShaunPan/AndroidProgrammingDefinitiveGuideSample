@@ -39,5 +39,9 @@
     <string name="crime_details_label">DETAILS</string>
     <string name="crime_solved_label">Solved</string>
     <string name="date_picker_title">Date of crime:</string>
-
+    
+    <!-- HelloMoon -->
+    <string name="helloMoon_play">Play</string>
+    <string name="helloMoon_stop">Stop</string>
+    <string name="helloMoon_description">Neil Armstrong stepping onto the moon</string>
 </resources>

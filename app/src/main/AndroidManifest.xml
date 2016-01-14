@@ -32,10 +32,15 @@
         <activity
             android:name="com.pan.guidesample.criminalintent.CrimeListActivity"
             android:label="@string/CriminalIntent" />
+
         <activity
             android:name="com.pan.guidesample.criminalintent.CrimePagerActivity"
             android:label="@string/CriminalIntent" />
 
+        <!-- HelloMoon -->
+        <activity
+            android:name="com.pan.guidesample.hellomoon.HelloMoonActivity"
+            android:label="@string/HelloMoon" />
     </application>
 
 </manifest>
