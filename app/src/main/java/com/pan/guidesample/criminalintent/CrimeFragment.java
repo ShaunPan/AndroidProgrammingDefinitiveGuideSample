@@ -1,8 +1,11 @@
 package com.pan.guidesample.criminalintent;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.EditText;
 import com.pan.androidprogrammingdefinitiveguidesample.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -33,6 +37,8 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mSolvedCheckbox;
     public static final String EXTRA_CRIME_ID = "com.pan.guidesample.criminalintent.crime_id";
+    private static final String DIALOG_DATE = "date";
+    private static final int REQUEST_DATE = 0;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle bundle = new Bundle();
@@ -74,9 +80,16 @@ public class CrimeFragment extends Fragment {
         });
 
         mDateButton = (Button) view.findViewById(R.id.crime_date);
-        SimpleDateFormat format = new SimpleDateFormat("EEEE,MMM dd,yyyy", Locale.US);
-        mDateButton.setText(format.format(mCrime.getmDate()));
-        mDateButton.setEnabled(false);
+        updateDate();
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+                DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(mCrime.getmDate());
+                datePickerFragment.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                datePickerFragment.show(supportFragmentManager, DIALOG_DATE);
+            }
+        });
 
         mSolvedCheckbox = (CheckBox) view.findViewById(R.id.crime_solved);
         mSolvedCheckbox.setChecked(mCrime.ismSolved());
@@ -87,5 +100,24 @@ public class CrimeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    /**
+     * 更新DateButton上的日期
+     */
+    private void updateDate() {
+        SimpleDateFormat format = new SimpleDateFormat("EEEE,MMM dd,yyyy", Locale.CHINA);
+        mDateButton.setText(format.format(mCrime.getmDate()));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) return;
+        if (requestCode == REQUEST_DATE) {
+            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            //存储数据
+            mCrime.setmDate(date);
+            updateDate();
+        }
     }
 }

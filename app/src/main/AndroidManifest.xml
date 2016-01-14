@@ -27,9 +27,8 @@
             android:label="@string/GeoQuiz" />
 
         <!-- CrimeIntent -->
-        <activity
-            android:name="com.pan.guidesample.criminalintent.CrimeActivity"
-            android:label="@string/CriminalIntent" />
+        <activity android:name="com.pan.guidesample.criminalintent.CrimeActivity" />
+
         <activity
             android:name="com.pan.guidesample.criminalintent.CrimeListActivity"
             android:label="@string/CriminalIntent" />
