@@ -2,10 +2,9 @@ package com.pan.guidesample.geoquiz;
 
 /*
  * File Name:TrueFalse
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/11 23:32
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class TrueFalse {
 

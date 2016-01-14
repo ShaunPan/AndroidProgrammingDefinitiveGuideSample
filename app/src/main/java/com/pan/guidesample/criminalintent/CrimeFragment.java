@@ -18,6 +18,7 @@ import android.widget.EditText;
 
 import com.pan.androidprogrammingdefinitiveguidesample.R;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -25,19 +26,20 @@ import java.util.UUID;
 
 /*
  * File Name:CrimeFragment
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/13 15:00
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class CrimeFragment extends Fragment {
 
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
+    private Button mTimeButton;
     private CheckBox mSolvedCheckbox;
     public static final String EXTRA_CRIME_ID = "com.pan.guidesample.criminalintent.crime_id";
     private static final String DIALOG_DATE = "date";
+    private static final String REQUEST_TIME = "time";
     private static final int REQUEST_DATE = 0;
 
     public static CrimeFragment newInstance(UUID crimeId) {
@@ -91,6 +93,18 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+        mTimeButton = (Button) view.findViewById(R.id.crime_time);
+        updateTime();
+        mTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+                TimePickerFragment timePickerFragment = new TimePickerFragment();
+                timePickerFragment.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                timePickerFragment.show(supportFragmentManager, REQUEST_TIME);
+            }
+        });
+
         mSolvedCheckbox = (CheckBox) view.findViewById(R.id.crime_solved);
         mSolvedCheckbox.setChecked(mCrime.ismSolved());
         mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -100,6 +114,11 @@ public class CrimeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void updateTime() {
+        DateFormat df = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
+        mTimeButton.setText(df.format(new Date()));
     }
 
     /**

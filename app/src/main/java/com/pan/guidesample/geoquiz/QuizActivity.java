@@ -16,10 +16,9 @@ import com.pan.androidprogrammingdefinitiveguidesample.R;
 
 /*
  * File Name:QuizActivity
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/11 22:50
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class QuizActivity extends Activity {
 

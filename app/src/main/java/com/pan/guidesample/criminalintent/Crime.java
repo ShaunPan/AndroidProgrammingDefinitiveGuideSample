@@ -5,10 +5,9 @@ import java.util.UUID;
 
 /*
  * File Name:Crime
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/13 14:48
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class Crime {
 

@@ -18,10 +18,9 @@ import java.util.Locale;
 
 /*
  * File Name:CrimeListFragment
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/13 18:01
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class CrimeListFragment extends ListFragment {
 

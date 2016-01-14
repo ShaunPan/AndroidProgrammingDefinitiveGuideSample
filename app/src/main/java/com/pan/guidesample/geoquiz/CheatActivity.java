@@ -12,10 +12,9 @@ import com.pan.androidprogrammingdefinitiveguidesample.R;
 
 /*
  * File Name:CheatActivity
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/12 15:11
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class CheatActivity extends Activity {
 

@@ -6,10 +6,9 @@ import java.util.UUID;
 
 /*
  * File Name:CriminalActivity
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/13 12:28
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class CrimeActivity extends SingleFragmentActivity {
 

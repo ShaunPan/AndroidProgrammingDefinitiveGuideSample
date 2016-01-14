@@ -20,10 +20,9 @@ import java.util.GregorianCalendar;
 
 /*
  * File Name:DatePickerFragment
- * Author:Better.Z
+ * Author:Pan
  * Date:2016/1/14 10:41
  * Description:
- * Copyright:www.YangFanApp.com
  */
 public class DatePickerFragment extends DialogFragment {
 
@@ -46,10 +45,9 @@ public class DatePickerFragment extends DialogFragment {
         calendar.setTime(mDate);
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_date, null);
-
         DatePicker datePicker = (DatePicker) view.findViewById(R.id.dialog_date_datePicker);
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
@@ -76,13 +74,18 @@ public class DatePickerFragment extends DialogFragment {
                 .create();
     }
 
+    /**
+     * 返回结果
+     *
+     * @param resultCode 结果码
+     */
     private void sendResult(int resultCode) {
         if (getTargetFragment() == null)
             return;
 
         Intent intent = new Intent();
-        intent.putExtra(EXTRA_DATE,mDate);
-        getTargetFragment().onActivityResult(getTargetRequestCode(),resultCode,intent);
+        intent.putExtra(EXTRA_DATE, mDate);
+        getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
 
     }
 }
