@@ -35,7 +35,12 @@
 
         <activity
             android:name="com.pan.guidesample.criminalintent.CrimePagerActivity"
-            android:label="@string/CriminalIntent" />
+            android:label="@string/CriminalIntent">
+            <!-- 配置该Activity的父Activity -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pan.guidesample.criminalintent.CrimeListActivity" />
+        </activity>
 
         <!-- HelloMoon -->
         <activity
