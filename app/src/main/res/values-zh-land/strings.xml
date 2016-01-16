@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">你好，月球</string>
+    <string name="helloMoon_play">播放</string>
+    <string name="helloMoon_stop">停止</string>
+    <string name="helloMoon_description">尼尔·阿姆斯特朗登陆到月球</string>
+</resources>

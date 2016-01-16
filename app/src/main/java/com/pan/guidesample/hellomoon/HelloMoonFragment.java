@@ -22,6 +22,13 @@ public class HelloMoonFragment extends Fragment {
     private Button mStopButton;
     private AudioPlayer mPlayer = new AudioPlayer();
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //屏幕旋转时，保留Fragment，保证屏幕旋转时，音频不被停止
+        setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,4 +55,5 @@ public class HelloMoonFragment extends Fragment {
         super.onDestroy();
         mPlayer.stop();
     }
+
 }
