@@ -25,15 +25,14 @@ public class CrimeLab {
 
     private CrimeLab(Context appContext) {
         mAppContext = appContext;
-//        mCrimes = new ArrayList<>();
         mSerializer = new CriminalIntentJSONSerializer(appContext, FILENAME);
 
         try {
             mCrimes = mSerializer.loadCrimes();
         } catch (Exception e) {
-            mCrimes = new ArrayList<Crime>();
+            mCrimes = new ArrayList<>();
             e.printStackTrace();
-            Log.e(TAG,"Error loading crimes:",e);
+            Log.e(TAG, "Error loading crimes:", e);
         }
     }
 
@@ -44,8 +43,22 @@ public class CrimeLab {
         return sCrimeLab;
     }
 
+    /**
+     * 添加记录
+     *
+     * @param crime 记录对象
+     */
     public void addCrime(Crime crime) {
         mCrimes.add(crime);
+    }
+
+    /**
+     * 删除记录
+     *
+     * @param crime 记录对象
+     */
+    public void deleteCrime(Crime crime) {
+        mCrimes.remove(crime);
     }
 
     /**

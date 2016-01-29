@@ -41,17 +41,35 @@ public class CriminalIntentJSONSerializer {
      */
     public void saveCrimes(ArrayList<Crime> crimes) throws IOException, JSONException {
         JSONArray jsonArray = new JSONArray();
-        for (Crime crime : crimes) {
-            jsonArray.put(crime.toJSON());
-            Writer writer = null;
-            try {
-                OutputStream outputStream = mContext.openFileOutput(mFileName, Context.MODE_PRIVATE);
-                writer = new OutputStreamWriter(outputStream);
-                writer.write(jsonArray.toString());
-            } finally {
-                if (writer != null)
-                    writer.close();
+        //修复当数据只有一条时，执行删除操作后，没有进行文件存储的bug
+        //书中的代码时有这个bug的
+        if (crimes.size() != 0) {
+            for (Crime crime : crimes) {
+                jsonArray.put(crime.toJSON());
+                writeDataToFile(jsonArray);
             }
+        } else {
+            writeDataToFile(jsonArray);//当数据全被删除时，存入空的json字符串
+        }
+
+    }
+
+    /**
+     * 将Json数据写入文件
+     *
+     * @param jsonArray Json数据
+     * @throws IOException
+     * @throws JSONException
+     */
+    private void writeDataToFile(JSONArray jsonArray) throws IOException, JSONException {
+        Writer writer = null;
+        try {
+            OutputStream outputStream = mContext.openFileOutput(mFileName, Context.MODE_PRIVATE);
+            writer = new OutputStreamWriter(outputStream);
+            writer.write(jsonArray.toString());
+        } finally {
+            if (writer != null)
+                writer.close();
         }
     }
 
