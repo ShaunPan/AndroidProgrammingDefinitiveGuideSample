@@ -42,10 +42,18 @@
                 android:value="com.pan.guidesample.criminalintent.CrimeListActivity" />
         </activity>
 
+        <activity
+            android:name="com.pan.guidesample.criminalintent.CrimeCameraActivity"
+            android:label="@string/take"
+            android:screenOrientation="landscape" />
+
         <!-- HelloMoon -->
         <activity
             android:name="com.pan.guidesample.hellomoon.HelloMoonActivity"
             android:label="@string/HelloMoon" />
     </application>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.Camera" />
 
 </manifest>

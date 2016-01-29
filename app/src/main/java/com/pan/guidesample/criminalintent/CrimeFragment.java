@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.pan.androidprogrammingdefinitiveguidesample.R;
 
@@ -42,6 +45,7 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private Button mTimeButton;
     private CheckBox mSolvedCheckbox;
+    private ImageButton mPhotoButton;
     public static final String EXTRA_CRIME_ID = "com.pan.guidesample.criminalintent.crime_id";
     private static final String DIALOG_DATE = "date";
     private static final String REQUEST_TIME = "time";
@@ -130,6 +134,27 @@ public class CrimeFragment extends Fragment {
                 mCrime.setmSolved(isChecked);
             }
         });
+
+
+        mPhotoButton = (ImageButton) view.findViewById(R.id.crime_imageButton);
+        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CrimeCameraActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //判断设备是否具备摄像头
+        PackageManager packageManager = getActivity().getPackageManager();
+        boolean hasACamera = packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||//后置摄像头
+                packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT) ||//前置摄像头
+                Build.VERSION.SDK_INT == Build.VERSION_CODES.GINGERBREAD ||//系统版本
+                Camera.getNumberOfCameras() > 0;//摄像头数量
+
+        if (!hasACamera) {
+            mPhotoButton.setEnabled(false);
+        }
         return view;
     }
 
