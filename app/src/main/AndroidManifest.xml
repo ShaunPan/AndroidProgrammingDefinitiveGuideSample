@@ -44,6 +44,7 @@
 
         <activity
             android:name="com.pan.guidesample.criminalintent.CrimeCameraActivity"
+            android:exported="true"
             android:label="@string/take"
             android:screenOrientation="landscape" />
 

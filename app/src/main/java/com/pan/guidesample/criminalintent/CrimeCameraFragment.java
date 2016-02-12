@@ -1,6 +1,9 @@
 package com.pan.guidesample.criminalintent;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,31 +19,86 @@ import android.widget.Button;
 
 import com.pan.androidprogrammingdefinitiveguidesample.R;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /*
  * File Name:CrimeCameraFragment
  * Author:Pan
  * Date:2016/1/29 16:17
- * Description:
+ * Description:相机拍照界面
  */
 @SuppressWarnings("deprecation")//消除弃用代码相关的警告信息
 public class CrimeCameraFragment extends Fragment {
 
     private static final String TAG = "CrimeCameraFragment";
+    public static final String EXTRA_PHOTO_FILENAME = "com.pan.guidesample.criminalintent.photo_filename";
     private Camera mCamera;
     private SurfaceView mSurfaceView;
+    private View mProgressContainer;
+    private Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
+        @Override
+        public void onShutter() {
+            mProgressContainer.setVisibility(View.VISIBLE);
+        }
+    };
+
+    private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            //随机生成一个文件名
+            String fileName = UUID.randomUUID().toString() + ".jpg";
+            //保存图片到存储空间
+            FileOutputStream os = null;
+            boolean success = true;
+
+            try {
+                os = getActivity().openFileOutput(fileName, Context.MODE_PRIVATE);
+                os.write(data);
+            } catch (Exception e) {
+                Log.e(TAG, "Error writing to file" + fileName, e);
+                success = false;
+            } finally {
+                try {
+                    if (os != null) {
+                        os.close();
+                    }
+                } catch (IOException e) {
+                    Log.e(TAG, "Error closing file" + fileName, e);
+                    success = false;
+                }
+            }
+
+            //返回生成的图片名
+            if (success) {
+                Intent intent = new Intent();
+                intent.putExtra(EXTRA_PHOTO_FILENAME,fileName);
+                getActivity().setResult(Activity.RESULT_OK,intent);
+            }else {
+                getActivity().setResult(Activity.RESULT_CANCELED);
+            }
+
+            getActivity().finish();
+        }
+    };
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_crime_camera, container, false);
+        mProgressContainer = view.findViewById(R.id.crime_camera_progressContainer);
+        mProgressContainer.setVisibility(View.INVISIBLE);
+
         Button takePictureButton = (Button) view.findViewById(R.id.crime_camera_takePictureButton);
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().finish();
+                if (mCamera != null){
+                    mCamera.takePicture(mShutterCallback,null,mPictureCallback);
+                }
             }
         });
 
