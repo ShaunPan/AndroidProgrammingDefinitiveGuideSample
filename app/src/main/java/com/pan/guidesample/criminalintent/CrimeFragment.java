@@ -55,6 +55,7 @@ public class CrimeFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_PHOTO = 1;
     public static final String TAG = "CrimeFragment";
+    private static final String DIALOG_IMAGE = "image";
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle bundle = new Bundle();
@@ -162,6 +163,20 @@ public class CrimeFragment extends Fragment {
         }
 
         mPhotoView = (ImageView) view.findViewById(R.id.crime_imageView);
+        mPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Photo photo = mCrime.getmPhoto();
+                if (photo == null) {
+                    return;
+                }
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                //获取图片路径
+                String path = getActivity().getFileStreamPath(photo.getFileName()).getAbsolutePath();
+                ImageFragment.newInstance(path).show(fm, DIALOG_IMAGE);
+            }
+        });
         return view;
     }
 
@@ -190,9 +205,9 @@ public class CrimeFragment extends Fragment {
     private void showPhoto() {
         Photo photo = mCrime.getmPhoto();
         BitmapDrawable bitmapDrawable = null;
-        if (photo!= null){
+        if (photo != null) {
             String path = getActivity().getFileStreamPath(photo.getFileName()).getAbsolutePath();
-            bitmapDrawable = PictureUtils.getScaledDrawable(getActivity(),path);
+            bitmapDrawable = PictureUtils.getScaledDrawable(getActivity(), path);
         }
         mPhotoView.setImageDrawable(bitmapDrawable);
     }
@@ -215,13 +230,14 @@ public class CrimeFragment extends Fragment {
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            //存储数据
+            //存储日期
             mCrime.setmDate(date);
             updateDate();
         } else if (requestCode == REQUEST_PHOTO) {
             String fileName = data.getStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
             if (fileName != null) {
                 Photo photo = new Photo(fileName);
+                //存储图片
                 mCrime.setmPhoto(photo);
                 showPhoto();
 //                Log.i(TAG, "Crime:" + mCrime.getmTitle() + "has a photo");
